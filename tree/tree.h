@@ -18,5 +18,11 @@ typedef struct Btree {
     int  (*tree_destroy)(Btree *bt);
 }Btree;
 
+enum {
+	int pre_ord = 0x00;
+	int in_ord  = 0x01;
+	int post_ord = 0x02;
+}trav_type;
+
 #endif
 
