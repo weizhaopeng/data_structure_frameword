@@ -19,8 +19,8 @@ typedef struct Btree {
 }Btree;
 
 enum {
-	int pre_ord = 0x00;
-	int in_ord  = 0x01;
+	int pre_ord  = 0x00;
+	int in_ord   = 0x01;
 	int post_ord = 0x02;
 }trav_type;
 

@@ -116,7 +116,77 @@ int post_order(BT_node *bt_node, int (*bt_oper)(BT_node *bt_node))
 	return ret;
 }
 
-//先序，中序，后序二叉树的非递归遍历算法
+//先序，中序，后序二叉树的迭代遍历算法
+int pre_order(BT_node *bt_root, int (*bt_oper)(BT_node *bt_node))
+{
+	if (bt_root == NULL)
+	return -1;
+
+	stack    s;
+	BT_node *p = bt_root;
+	int		 ret;
+	stack_create(&s, capacity);
+	
+	while (p != NULL) {
+		ret = bt_oper(p, bt_oper);
+		if (p != NULL) {
+			push(s, p->rbt);
+			p = p->lbt;
+		}
+		else {
+			p = pop(&s);
+		}
+	}
+	return ret;
+}
+
+int in_order(BT_node *bt_root, int (*bt_oper)(BT_node *bt_node))
+{
+	if (bt_root == NULL)
+		return -1;
+
+	stack    s;
+	BT_node *p = bt_root;
+	int 	 ret;
+	stack_create(&s, capacity);
+
+	while (p == NULL || stack_is_empty(&s) == 0) {
+		if (p != NULL) {
+			push(&s, p);
+			p = p->lrt;
+		}
+		else {
+			p = pop(&s);
+			ret = bt_oper(p);
+			p = p->rbt;
+		}
+	}
+	return ret;
+}
+
+//TODO:ret的值并不能代表真是的错误的返回值
+int post_order(BT_node *bt_root, int (*bt_oper)(BT_node *bt_node))
+{
+	if (bt_root == NULL)
+		return -1;
+	
+	stack    s;
+	BT_node *p = bt_root, node_temp;
+	int 	 ret;
+
+	while ( ) {
+		if (p != NULL) {
+			push(&s, p);
+			p = p->lbt;
+		}
+		else {
+			node_temp = p = pop(&s);
+			p = p->rbt;
+			ret = bt_oper(p);
+			if (p->lbt == NULL || p->rbt == NULL)
+				ret = bt_oper(node_temp);
+	}
+	return 0;
+}
 
 
-        
